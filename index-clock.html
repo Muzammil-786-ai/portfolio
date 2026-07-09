@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock - Muzammil's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+        
+        <h1>🕐 Global Digital Clock</h1>
+        
+        <div class="clocks-grid">
+            <!-- Pakistan Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇵🇰</span>
+                    <span>Pakistan (PKT)</span>
+                </div>
+                <div class="digital-time" id="pkt-time">--:--:--</div>
+                <div class="timezone-offset">UTC +5</div>
+            </div>
+
+            <!-- India Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇮🇳</span>
+                    <span>India (IST)</span>
+                </div>
+                <div class="digital-time" id="ist-time">--:--:--</div>
+                <div class="timezone-offset">UTC +5:30</div>
+            </div>
+
+            <!-- USA Eastern Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇺🇸</span>
+                    <span>USA - Eastern (EST)</span>
+                </div>
+                <div class="digital-time" id="est-time">--:--:--</div>
+                <div class="timezone-offset">UTC -5</div>
+            </div>
+
+            <!-- USA Pacific Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇺🇸</span>
+                    <span>USA - Pacific (PST)</span>
+                </div>
+                <div class="digital-time" id="pst-time">--:--:--</div>
+                <div class="timezone-offset">UTC -8</div>
+            </div>
+
+            <!-- UK Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇬🇧</span>
+                    <span>UK - London (GMT)</span>
+                </div>
+                <div class="digital-time" id="gmt-time">--:--:--</div>
+                <div class="timezone-offset">UTC +0</div>
+            </div>
+
+            <!-- Australia Sydney Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇦🇺</span>
+                    <span>Australia - Sydney (AEDT)</span>
+                </div>
+                <div class="digital-time" id="aedt-time">--:--:--</div>
+                <div class="timezone-offset">UTC +11</div>
+            </div>
+
+            <!-- Japan Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇯🇵</span>
+                    <span>Japan (JST)</span>
+                </div>
+                <div class="digital-time" id="jst-time">--:--:--</div>
+                <div class="timezone-offset">UTC +9</div>
+            </div>
+
+            <!-- Dubai Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇦🇪</span>
+                    <span>Dubai (GST)</span>
+                </div>
+                <div class="digital-time" id="gst-time">--:--:--</div>
+                <div class="timezone-offset">UTC +4</div>
+            </div>
+
+            <!-- Singapore Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇸🇬</span>
+                    <span>Singapore (SGT)</span>
+                </div>
+                <div class="digital-time" id="sgt-time">--:--:--</div>
+                <div class="timezone-offset">UTC +8</div>
+            </div>
+
+            <!-- UTC/GMT -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🌍</span>
+                    <span>Universal Time (UTC)</span>
+                </div>
+                <div class="digital-time" id="utc-time">--:--:--</div>
+                <div class="timezone-offset">UTC +0</div>
+            </div>
+        </div>
+
+        <div class="local-time">
+            <p>Your Local Time: <span id="local-time">--:--:--</span></p>
+            <p>Your Timezone: <span id="local-tz">--</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Function to format time with leading zeros
+        function formatTime(date) {
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Function to get time in specific timezone
+        function getTimeInTimezone(timezone) {
+            const now = new Date();
+            const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+            const newTime = new Date(utc + 3600000 * timezone);
+            return formatTime(newTime);
+        }
+
+        // Timezone mappings (offset in hours from UTC)
+        const timezones = {
+            'pkt-time': { offset: 5, name: 'Pakistan' },
+            'ist-time': { offset: 5.5, name: 'India' },
+            'est-time': { offset: -5, name: 'USA Eastern' },
+            'pst-time': { offset: -8, name: 'USA Pacific' },
+            'gmt-time': { offset: 0, name: 'London' },
+            'aedt-time': { offset: 11, name: 'Sydney' },
+            'jst-time': { offset: 9, name: 'Japan' },
+            'gst-time': { offset: 4, name: 'Dubai' },
+            'sgt-time': { offset: 8, name: 'Singapore' },
+            'utc-time': { offset: 0, name: 'UTC' }
+        };
+
+        // Update all clocks
+        function updateClocks() {
+            // Update timezone clocks
+            for (const [elementId, { offset }] of Object.entries(timezones)) {
+                const timeElement = document.getElementById(elementId);
+                if (timeElement) {
+                    timeElement.textContent = getTimeInTimezone(offset);
+                }
+            }
+
+            // Update local time
+            const now = new Date();
+            document.getElementById('local-time').textContent = formatTime(now);
+            
+            // Get local timezone
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById('local-tz').textContent = timezone;
+        }
+
+        // Update clocks immediately and then every second
+        updateClocks();
+        setInterval(updateClocks, 1000);
+
+        // Add smooth animations on page load
+        window.addEventListener('load', () => {
+            const cards = document.querySelectorAll('.clock-card');
+            cards.forEach((card, index) => {
+                card.style.animation = `slideUp 0.6s ease-out ${index * 0.05}s both`;
+            });
+        });
+    </script>
+</body>
+</html>

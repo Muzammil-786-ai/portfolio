@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard - Muzammil's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+        
+        <div class="weather-container">
+            <header>
+                <h1>🌤️ Weather Dashboard</h1>
+                <p>Real-time weather information from around the world</p>
+            </header>
+
+            <div class="search-section">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Enter city name..."
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn">Search</button>
+                </div>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+
+            <div class="weather-content">
+                <!-- Current Weather -->
+                <div id="currentWeather" class="current-weather">
+                    <div class="weather-card">
+                        <div class="loading">Loading weather data...</div>
+                    </div>
+                </div>
+
+                <!-- Forecast -->
+                <div class="forecast-section">
+                    <h2>5-Day Forecast</h2>
+                    <div id="forecastContainer" class="forecast-grid">
+                        <div class="loading">Loading forecast...</div>
+                    </div>
+                </div>
+
+                <!-- Weather Details -->
+                <div id="weatherDetails" class="weather-details">
+                    <h2>Weather Details</h2>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">💧 Humidity</span>
+                            <span class="detail-value" id="humidity">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">💨 Wind Speed</span>
+                            <span class="detail-value" id="windSpeed">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">🧭 Wind Direction</span>
+                            <span class="detail-value" id="windDirection">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">🌡️ Feels Like</span>
+                            <span class="detail-value" id="feelsLike">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">👁️ Visibility</span>
+                            <span class="detail-value" id="visibility">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">📊 Pressure</span>
+                            <span class="detail-value" id="pressure">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // OpenWeatherMap API Configuration
+        const API_KEY = '4d8fb5b93d4af21d66a2948710284366';
+        const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+
+        // Popular cities for quick access
+        const popularCities = [
+            'Karachi', 'Lahore', 'Islamabad', 'New York', 'London',
+            'Dubai', 'Tokyo', 'Paris', 'Sydney', 'Singapore',
+            'Mumbai', 'Delhi', 'Bangkok', 'Hong Kong', 'Seoul'
+        ];
+
+        // DOM Elements
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const suggestionsDiv = document.getElementById('suggestions');
+        const currentWeatherDiv = document.getElementById('currentWeather');
+        const forecastContainer = document.getElementById('forecastContainer');
+        const weatherDetailsDiv = document.getElementById('weatherDetails');
+
+        // Initialize
+        window.addEventListener('load', () => {
+            loadWeatherForCity('Karachi');
+        });
+
+        // Search functionality
+        searchBtn.addEventListener('click', () => {
+            const city = searchInput.value.trim();
+            if (city) {
+                loadWeatherForCity(city);
+                searchInput.value = '';
+                suggestionsDiv.classList.remove('active');
+            }
+        });
+
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                searchBtn.click();
+            } else {
+                showSuggestions(e.target.value);
+            }
+        });
+
+        // Show city suggestions
+        function showSuggestions(input) {
+            if (!input) {
+                suggestionsDiv.classList.remove('active');
+                return;
+            }
+
+            const filtered = popularCities.filter(city =>
+                city.toLowerCase().includes(input.toLowerCase())
+            );
+
+            if (filtered.length === 0) {
+                suggestionsDiv.classList.remove('active');
+                return;
+            }
+
+            suggestionsDiv.innerHTML = filtered
+                .map(city => `
+                    <div class="suggestion-item" onclick="selectSuggestion('${city}')">
+                        ${city}
+                    </div>
+                `)
+                .join('');
+
+            suggestionsDiv.classList.add('active');
+        }
+
+        function selectSuggestion(city) {
+            searchInput.value = city;
+            suggestionsDiv.classList.remove('active');
+            loadWeatherForCity(city);
+        }
+
+        // Fetch weather data
+        async function loadWeatherForCity(city) {
+            try {
+                currentWeatherDiv.innerHTML = '<div class="loading">Loading weather data...</div>';
+                forecastContainer.innerHTML = '<div class="loading">Loading forecast...</div>';
+
+                // Get current weather
+                const weatherResponse = await fetch(
+                    `${BASE_URL}/weather?q=${city}&units=metric&appid=${API_KEY}`
+                );
+
+                if (!weatherResponse.ok) {
+                    throw new Error('City not found');
+                }
+
+                const weatherData = await weatherResponse.json();
+
+                // Get forecast data
+                const forecastResponse = await fetch(
+                    `${BASE_URL}/forecast?q=${city}&units=metric&appid=${API_KEY}`
+                );
+                const forecastData = await forecastResponse.json();
+
+                displayCurrentWeather(weatherData);
+                displayForecast(forecastData);
+                displayWeatherDetails(weatherData);
+
+            } catch (error) {
+                currentWeatherDiv.innerHTML = `<div class="error">❌ ${error.message}</div>`;
+                forecastContainer.innerHTML = '';
+            }
+        }
+
+        // Display current weather
+        function displayCurrentWeather(data) {
+            const { name, sys, main, weather, wind } = data;
+            const weatherIcon = getWeatherIcon(weather[0].main);
+            const updateTime = new Date().toLocaleTimeString();
+
+            const html = `
+                <div class="weather-card">
+                    <div class="weather-header">
+                        <div class="location-time">
+                            <h2>📍 ${name}, ${sys.country}</h2>
+                            <p class="update-time">Updated: ${updateTime}</p>
+                        </div>
+                        <div class="weather-icon-temp">
+                            <div class="weather-icon">${weatherIcon}</div>
+                            <div class="temperature">${Math.round(main.temp)}°C</div>
+                            <div class="weather-description">${weather[0].description}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            currentWeatherDiv.innerHTML = html;
+        }
+
+        // Display forecast
+        function displayForecast(data) {
+            const forecasts = {};
+
+            // Group by day
+            data.list.forEach(item => {
+                const date = new Date(item.dt * 1000);
+                const dayKey = date.toLocaleDateString();
+
+                if (!forecasts[dayKey]) {
+                    forecasts[dayKey] = item;
+                }
+            });
+
+            const html = Object.keys(forecasts)
+                .slice(0, 5)
+                .map(date => {
+                    const item = forecasts[date];
+                    const dateObj = new Date(item.dt * 1000);
+                    const weekday = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+                    const icon = getWeatherIcon(item.weather[0].main);
+
+                    return `
+                        <div class="forecast-card">
+                            <div class="forecast-date">${weekday}</div>
+                            <div class="forecast-icon">${icon}</div>
+                            <div class="forecast-temp">${Math.round(item.main.temp)}°C</div>
+                            <div class="forecast-desc">${item.weather[0].description}</div>
+                        </div>
+                    `;
+                })
+                .join('');
+
+            forecastContainer.innerHTML = html;
+        }
+
+        // Display detailed weather information
+        function displayWeatherDetails(data) {
+            const { main, wind, visibility, sys } = data;
+
+            document.getElementById('humidity').textContent = `${main.humidity}%`;
+            document.getElementById('windSpeed').textContent = `${wind.speed} m/s`;
+            document.getElementById('windDirection').textContent = `${getWindDirection(wind.deg)}`;
+            document.getElementById('feelsLike').textContent = `${Math.round(main.feels_like)}°C`;
+            document.getElementById('visibility').textContent = `${(visibility / 1000).toFixed(1)} km`;
+            document.getElementById('pressure').textContent = `${main.pressure} hPa`;
+        }
+
+        // Get weather emoji icon
+        function getWeatherIcon(description) {
+            const icons = {
+                'Clear': '☀️',
+                'Clouds': '☁️',
+                'Rain': '🌧️',
+                'Drizzle': '🌦️',
+                'Thunderstorm': '⛈️',
+                'Snow': '❄️',
+                'Mist': '🌫️',
+                'Smoke': '💨',
+                'Haze': '🌫️',
+                'Dust': '🌪️',
+                'Fog': '🌫️',
+                'Sand': '🌪️',
+                'Ash': '🌫️',
+                'Squall': '💨',
+                'Tornado': '🌪️'
+            };
+
+            return icons[description] || '🌤️';
+        }
+
+        // Get wind direction
+        function getWindDirection(degree) {
+            const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+            const index = Math.round(degree / 22.5) % 16;
+            return directions[index] + ` (${degree}°)`;
+        }
+
+        // Close suggestions when clicking outside
+        document.addEventListener('click', (e) => {
+            if (e.target !== searchInput && !e.target.closest('.suggestions')) {
+                suggestionsDiv.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

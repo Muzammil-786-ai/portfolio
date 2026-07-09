@@ -3,120 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Clock - Multiple Time Zones</title>
+    <title>Muzammil Hussain - Full Stack Developer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🕐 Global Digital Clock</h1>
-        
-        <div class="clocks-grid">
-            <!-- Pakistan Time -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🇵🇰</span>
-                    <span>Pakistan (PKT)</span>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">Muzammil</div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
-                <div class="digital-time" id="pkt-time">--:--:--</div>
-                <div class="timezone-offset">UTC +5</div>
-            </div>
-
-            <!-- India Time -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🇮🇳</span>
-                    <span>India (IST)</span>
-                </div>
-                <div class="digital-time" id="ist-time">--:--:--</div>
-                <div class="timezone-offset">UTC +5:30</div>
-            </div>
-
-            <!-- USA Eastern Time -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🇺🇸</span>
-                    <span>USA - Eastern (EST)</span>
-                </div>
-                <div class="digital-time" id="est-time">--:--:--</div>
-                <div class="timezone-offset">UTC -5</div>
-            </div>
-
-            <!-- USA Pacific Time -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🇺🇸</span>
-                    <span>USA - Pacific (PST)</span>
-                </div>
-                <div class="digital-time" id="pst-time">--:--:--</div>
-                <div class="timezone-offset">UTC -8</div>
-            </div>
-
-            <!-- UK Time -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🇬🇧</span>
-                    <span>UK - London (GMT)</span>
-                </div>
-                <div class="digital-time" id="gmt-time">--:--:--</div>
-                <div class="timezone-offset">UTC +0</div>
-            </div>
-
-            <!-- Australia Sydney Time -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🇦🇺</span>
-                    <span>Australia - Sydney (AEDT)</span>
-                </div>
-                <div class="digital-time" id="aedt-time">--:--:--</div>
-                <div class="timezone-offset">UTC +11</div>
-            </div>
-
-            <!-- Japan Time -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🇯🇵</span>
-                    <span>Japan (JST)</span>
-                </div>
-                <div class="digital-time" id="jst-time">--:--:--</div>
-                <div class="timezone-offset">UTC +9</div>
-            </div>
-
-            <!-- Dubai Time -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🇦🇪</span>
-                    <span>Dubai (GST)</span>
-                </div>
-                <div class="digital-time" id="gst-time">--:--:--</div>
-                <div class="timezone-offset">UTC +4</div>
-            </div>
-
-            <!-- Singapore Time -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🇸🇬</span>
-                    <span>Singapore (SGT)</span>
-                </div>
-                <div class="digital-time" id="sgt-time">--:--:--</div>
-                <div class="timezone-offset">UTC +8</div>
-            </div>
-
-            <!-- UTC/GMT -->
-            <div class="clock-card">
-                <div class="timezone-name">
-                    <span class="flag">🌍</span>
-                    <span>Universal Time (UTC)</span>
-                </div>
-                <div class="digital-time" id="utc-time">--:--:--</div>
-                <div class="timezone-offset">UTC +0</div>
             </div>
         </div>
+    </nav>
 
-        <div class="local-time">
-            <p>Your Local Time: <span id="local-time">--:--:--</span></p>
-            <p>Your Timezone: <span id="local-tz">--</span></p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Hi, I'm <span class="highlight">Muzammil Hussain</span></h1>
+                <p class="hero-subtitle">Full Stack Developer | Web Designer | Tech Enthusiast</p>
+                <p class="hero-description">Creating beautiful and functional web applications that solve real-world problems</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <div class="icon-circle">💻</div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I'm a passionate full-stack developer from Pakistan with a strong foundation in web technologies. I love building responsive, user-friendly applications that make a difference.</p>
+                    <p>With expertise in HTML, CSS, JavaScript, and PHP, I create web solutions that are not just visually appealing but also highly functional and performant.</p>
+                    <p>When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>50+</h3>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat">
+                            <h3>2+</h3>
+                            <p>Years Experience</p>
+                        </div>
+                        <div class="stat">
+                            <h3>100%</h3>
+                            <p>Client Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-box">👨‍💻</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Digital Clock -->
+                <div class="project-card">
+                    <div class="project-image">🕐</div>
+                    <div class="project-content">
+                        <h3>Digital Clock</h3>
+                        <p>A beautiful digital clock displaying time across 10 different time zones with real-time updates and smooth animations.</p>
+                        <div class="tech-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <a href="index-clock.html" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Weather Dashboard -->
+                <div class="project-card">
+                    <div class="project-image">🌤️</div>
+                    <div class="project-content">
+                        <h3>Weather Dashboard</h3>
+                        <p>Real-time weather dashboard using OpenWeatherMap API with city search, 5-day forecast, and favorite cities feature.</p>
+                        <div class="tech-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">API</span>
+                        </div>
+                        <a href="index-weather.html" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- E-Commerce Site -->
+                <div class="project-card">
+                    <div class="project-image">🛍️</div>
+                    <div class="project-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>Full-featured e-commerce website with product catalog, shopping cart, and payment integration capabilities.</p>
+                        <div class="tech-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Task Manager -->
+                <div class="project-card">
+                    <div class="project-image">✓</div>
+                    <div class="project-content">
+                        <h3>Task Manager App</h3>
+                        <p>Interactive task management application with add, edit, delete functionality and local storage persistence.</p>
+                        <div class="tech-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Site -->
+                <div class="project-card">
+                    <div class="project-image">🎨</div>
+                    <div class="project-content">
+                        <h3>Creative Portfolio</h3>
+                        <p>Modern and responsive portfolio website showcasing skills, projects, and professional achievements.</p>
+                        <div class="tech-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Chat Application -->
+                <div class="project-card">
+                    <div class="project-image">💬</div>
+                    <div class="project-content">
+                        <h3>Chat Application</h3>
+                        <p>Real-time messaging application with user authentication, online status, and message history.</p>
+                        <div class="tech-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">WebSocket</span>
+                            <span class="tag">Node.js</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <ul class="skill-list">
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>Responsive Design</li>
+                        <li>UI/UX Design</li>
+                        <li>Bootstrap & Tailwind</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <ul class="skill-list">
+                        <li>PHP</li>
+                        <li>MySQL & Databases</li>
+                        <li>RESTful APIs</li>
+                        <li>Server Management</li>
+                        <li>Security Best Practices</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & More</h3>
+                    <ul class="skill-list">
+                        <li>Git & GitHub</li>
+                        <li>Version Control</li>
+                        <li>Web Performance</li>
+                        <li>Testing & Debugging</li>
+                        <li>Problem Solving</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>I'm always open to new opportunities and interesting projects. Feel free to reach out!</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:muzammil03239772314@gmail.com">muzammil03239772314@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p><a href="tel:+923239772314">+92 323 9772314</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Karachi, Pakistan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://github.com/Muzammil-786-ai" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://facebook.com" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Muzammil Hussain. All rights reserved. | Designed & Developed with ❤️</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock - Multiple Time Zones</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🕐 Global Digital Clock</h1>
+        
+        <div class="clocks-grid">
+            <!-- Pakistan Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇵🇰</span>
+                    <span>Pakistan (PKT)</span>
+                </div>
+                <div class="digital-time" id="pkt-time">--:--:--</div>
+                <div class="timezone-offset">UTC +5</div>
+            </div>
+
+            <!-- India Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇮🇳</span>
+                    <span>India (IST)</span>
+                </div>
+                <div class="digital-time" id="ist-time">--:--:--</div>
+                <div class="timezone-offset">UTC +5:30</div>
+            </div>
+
+            <!-- USA Eastern Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇺🇸</span>
+                    <span>USA - Eastern (EST)</span>
+                </div>
+                <div class="digital-time" id="est-time">--:--:--</div>
+                <div class="timezone-offset">UTC -5</div>
+            </div>
+
+            <!-- USA Pacific Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇺🇸</span>
+                    <span>USA - Pacific (PST)</span>
+                </div>
+                <div class="digital-time" id="pst-time">--:--:--</div>
+                <div class="timezone-offset">UTC -8</div>
+            </div>
+
+            <!-- UK Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇬🇧</span>
+                    <span>UK - London (GMT)</span>
+                </div>
+                <div class="digital-time" id="gmt-time">--:--:--</div>
+                <div class="timezone-offset">UTC +0</div>
+            </div>
+
+            <!-- Australia Sydney Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇦🇺</span>
+                    <span>Australia - Sydney (AEDT)</span>
+                </div>
+                <div class="digital-time" id="aedt-time">--:--:--</div>
+                <div class="timezone-offset">UTC +11</div>
+            </div>
+
+            <!-- Japan Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇯🇵</span>
+                    <span>Japan (JST)</span>
+                </div>
+                <div class="digital-time" id="jst-time">--:--:--</div>
+                <div class="timezone-offset">UTC +9</div>
+            </div>
+
+            <!-- Dubai Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇦🇪</span>
+                    <span>Dubai (GST)</span>
+                </div>
+                <div class="digital-time" id="gst-time">--:--:--</div>
+                <div class="timezone-offset">UTC +4</div>
+            </div>
+
+            <!-- Singapore Time -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🇸🇬</span>
+                    <span>Singapore (SGT)</span>
+                </div>
+                <div class="digital-time" id="sgt-time">--:--:--</div>
+                <div class="timezone-offset">UTC +8</div>
+            </div>
+
+            <!-- UTC/GMT -->
+            <div class="clock-card">
+                <div class="timezone-name">
+                    <span class="flag">🌍</span>
+                    <span>Universal Time (UTC)</span>
+                </div>
+                <div class="digital-time" id="utc-time">--:--:--</div>
+                <div class="timezone-offset">UTC +0</div>
+            </div>
+        </div>
+
+        <div class="local-time">
+            <p>Your Local Time: <span id="local-time">--:--:--</span></p>
+            <p>Your Timezone: <span id="local-tz">--</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

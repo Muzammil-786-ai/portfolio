@@ -129,7 +129,7 @@ Edit contact details in the contact section:
 
 - **Email**: muzammil03239772314@gmail.com
 - **Phone**: +92 323 9772314
-- **Location**: Karachi, Pakistan
+- **Location**: Nankana Shaib, Pakistan
 - **GitHub**: [Muzammil-786-ai](https://github.com/Muzammil-786-ai)
 
 ## 📝 License
